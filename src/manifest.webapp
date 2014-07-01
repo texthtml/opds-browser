@@ -1,0 +1,27 @@
+{
+	"name": "OPDS Browser",
+	"description": "Brower OPDS feed to find ebooks",
+	"version": "v0.1.0",
+
+	"launch_path": "/index.html",
+
+	"developer": {
+		"name": "Mathieu Rochette",
+		"url": "https://mathieu.rochette.cc/"
+	},
+
+	"icons": {
+		"60": "/images/60x60-place.png",
+		"128": "/images/128x128-place.png"
+	},
+
+	"default_locale": "en",
+
+	"type": "web",
+
+	"permissions": {
+		"systemXHR": {
+			"description": "required to access OPDS feeds & download ebooks"
+		}
+	}
+}

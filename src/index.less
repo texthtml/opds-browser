@@ -1,0 +1,56 @@
+@import '/vendor/building-blocks/style/headers.css';
+@import '/vendor/building-blocks/style/lists.css';
+@import '/vendor/building-blocks/style/progress_activity.css';
+@import '/vendor/building-blocks/style/toolbars.css';
+@import '/vendor/building-blocks/icons/styles/action_icons.css';
+
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	font: 10px/1em "MozTT", Sans-serif;
+}
+
+section[role=region] {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transition: transform 0.2s;
+	overflow: auto;
+
+	& > header ~ [role=main] {
+		position: absolute;
+		top: 5rem;
+		bottom: 0;
+		width: 100%;
+		overflow: auto;
+		background-color: #ffffff;
+	}
+
+	& > header + progress ~ [role=main] {
+		top: ~"calc(5rem + 3px)";
+	}
+
+	& > header + header ~ [role=main] {
+		top: ~"calc(5rem + 4rem)";
+	}
+
+	& > header + progress + header ~ [role=main] {
+		top: ~"calc(5rem + 4rem + 3px)";
+	}
+
+	& > header + progress {
+		visibility: hidden;
+	}
+
+	&.loading > header + progress {
+		visibility: visible;
+	}
+
+	& > [role=toolbar] + [role=main] {
+		bottom: 4rem;
+	}
+}
+

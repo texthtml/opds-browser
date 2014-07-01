@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html ng:csp>
+	<head>
+		<meta charset="utf-8">
+		<title>OPDS browser</title>
+
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+
+		<link rel="stylesheet" type="text/css" href="/index.css"/>
+
+		<script data-main="/js/index.js" src="/vendor/requirejs-bower/require.js"></script>
+
+		<script type="text/ng-template" id="feeds.html">
+			<section role="region" ng:class="{loading: loading}">
+				<header>
+					<h1>OPDS Browser</h1>
+				</header>
+				<progress max="100" value="0" class="pack-activity" ng:class="{loading: loading}"></progress>
+
+				<div role="main" data-type="list">
+					<ul>
+						<li ng:repeat="feed in feeds">
+							<a href="/feed/{{ feed.id }}/catalog/{{ feed.title }}">
+								<aside ng:show="feed.catalog.icon">
+									<img ng:src="{{ feed.catalog.icon }}">
+								</aside>
+								<p>{{ feed.title }}</p>
+								<p ng:show="feed.catalog.subtitle">{{ feed.catalog.subtitle }}</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</script>
+
+		<script type="text/ng-template" id="catalog.html">
+			<section role="region" ng:class="{loading: loading}">
+				<header>
+					<a href="/"><span class="icon icon-close">close</span></a>
+					<h1>{{ feed.title }}</h1>
+				</header>
+				<progress max="100" value="0" class="pack-activity"></progress>
+				<header ng:show="catalog.title">
+					<h2>{{ catalog.title }}</h2>
+				</header>
+
+				<div role="toolbar">
+					<ul>
+						<li ng:show="catalog.start">
+							<button class="action-icon email-flag" ng:click="nav(catalog.start)">start</button>
+						</li>
+					</ul>
+					<ul>
+						<li ng:show="catalog.previous">
+							<button class="action-icon back" ng:click="nav(catalog.previous)">back</button>
+						</li>
+						<li ng:show="catalog.next">
+							<button class="action-icon forward" ng:click="nav(catalog.next)">forward</button>
+						</li>
+					</ul>
+				</div>
+
+				<div role="main" ng:switch="catalog.kind">
+					<nav data-type="list" ng:switch-when="navigation">
+						<ul>
+							<li ng:repeat="entry in entries" class="nav-{{ entry.subsection.kind }}">
+								<a ng:href="/feed/{{ feed.id }}/catalog/{{ feed.title }}/{{ entry.subsection.href }}">
+									<aside ng:show="entry.thumbnail">
+										<img alt="placeholder" ng:src="{{ entry.thumbnail }}">
+									</aside>
+									<p>{{ entry.subsection.kind }} - {{ entry.title }}</p>
+									<p>{{ entry.content }}</p>
+								</a>
+							</li>
+						</ul>
+					</nav>
+
+					<ul data-type="list" ng:switch-when="acquisition">
+						<ul>
+							<li ng:repeat="entry in entries" class="nav-{{ entry.subsection.kind }}">
+								<a href="#" ng:click="details(entry)">
+									<aside ng:show="entry.thumbnail" class="pack-end">
+										<img alt="placeholder" ng:src="{{ entry.thumbnail }}">
+									</aside>
+									<p>{{ entry.subsection.kind }} - {{ entry.title }}</p>
+									<p>{{ entry.content }}</p>
+								</a>
+							</li>
+						</ul>
+					</ul>
+				</div>
+			</section>
+		</script>
+	</head>
+	<body ng:controller="DefaultController">
+		<ng:view></ng:view>
+	</body>
+</html>

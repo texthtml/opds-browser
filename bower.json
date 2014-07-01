@@ -1,0 +1,27 @@
+{
+  "name": "opds-browser",
+  "version": "1.0.0",
+  "authors": [
+    "Mathieu Rochette <mathieu@rochette.cc>"
+  ],
+  "license": "aGPLv3",
+  "homepage": "http://opds-browser.texthtml.net/",
+  "private": true,
+  "dependencies": {
+    "requirejs-bower": "~2.1",
+    "localforage": "~0.9.1",
+    "angular": "~1.2.19",
+    "angular-route": "~1.2.20",
+    "building-blocks": "#gh-pages",
+    "angular-touch": "~1.2.21"
+  },
+  "devDependencies": {
+    "squire": "~0.2",
+    "mocha": "~1.20",
+    "chai": "~1.9",
+    "chai-as-promised": "~4.1",
+    "sinon": "~1.10",
+    "sinon-chai": "~2.5.0",
+    "opds-test-catalog": "Feedbooks/opds-test-catalog"
+  }
+}
