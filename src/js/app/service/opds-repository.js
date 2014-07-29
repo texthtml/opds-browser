@@ -1,5 +1,5 @@
-define(['localforage', 'opds/opds'],
-	function(localforage, opds) {
+define(['localforage'],
+	function(localforage) {
 		'use strict';
 
 		var opdsRepository = {
@@ -9,18 +9,15 @@ define(['localforage', 'opds/opds'],
 
 					for(var id in opdsFeeds) {
 						var opdsFeed = opdsFeeds[id];
-						catalogs.push(opds.catalog(opdsFeed.uri).then(function(id, title) {
-							return function(catalog) {
-								return {
-									id: id,
-									title: title,
-									catalog: catalog
-								};
-							};
-						} (id, opdsFeed.title)));
+
+                        catalogs.push({
+                            id: id,
+                            title: opdsFeed.title,
+                            uri: opdsFeed.uri
+                        });
 					}
 
-					return Promise.all(catalogs);
+					return catalogs;
 				});
 			},
 			find: function(id) {

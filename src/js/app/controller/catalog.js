@@ -9,22 +9,18 @@ define(['opds/opds'], function(opds) {
 		};
 		$scope.loading = true;
 
+		var showCatalog = function(catalog) {
+			$scope.loading = false;
+			$scope.catalog = catalog;
+			$scope.$apply();
+		};
+
 		if($routeParams.uri === undefined) {
 			opdsRepository.find($routeParams.id).then(function(feed) {
-				$scope.loading = false;
-
-				$scope.feed = feed;
-				$scope.catalog = feed.catalog;
-
-				$scope.$apply();
-			});
+				return opds.catalog(feed.uri);
+			}).then(showCatalog);
 		} else {
-			opds.catalog($routeParams.uri).then(function(catalog) {
-				$scope.loading = false;
-				$scope.catalog = catalog;
-
-				$scope.$apply();
-			});
+			opds.catalog($routeParams.uri).then(showCatalog);
 		}
 
 		$scope.$watch('catalog', function(catalog) {
@@ -35,11 +31,7 @@ define(['opds/opds'], function(opds) {
 
 		$scope.nav = function(entry) {
 			$scope.loading = true;
-			entry.catalog().then(function(catalog) {
-				$scope.loading = false;
-				$scope.catalog = catalog;
-				$scope.$apply();
-			});
+			entry.catalog().then(showCatalog);
 		};
 
 		$scope.details = function(entry) {

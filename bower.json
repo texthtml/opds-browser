@@ -10,7 +10,7 @@
   "dependencies": {
     "requirejs-bower": "~2.1",
     "localforage": "~0.9.1",
-    "angular": "~1.2.19",
+    "angular": "~1.2.21",
     "angular-route": "~1.2.20",
     "building-blocks": "#gh-pages",
     "angular-touch": "~1.2.21"
